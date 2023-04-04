@@ -18,7 +18,6 @@ public class HeroScript : MonoBehaviour
         PlayerJump();
         setMoveAnimation();
         PlayerMove();
-        
     }
 
     private void Update()
@@ -29,8 +28,8 @@ public class HeroScript : MonoBehaviour
 
     public void PlayerMove()
     {
-        vector2Move = new Vector2(Input.GetAxis("Horizontal"), 0f);
-        transform.Translate(vector2Move * movespeed * Time.deltaTime);
+        vector2Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        transform.Translate((vector2Move * movespeed * Time.deltaTime).x, 0f, 0f);
     }
 
     public void PlayerJump()
@@ -49,7 +48,6 @@ public class HeroScript : MonoBehaviour
         {
             jump = false;
             playerAnimater.SetBool("Jump", false);
-            Debug.Log(jump);
         }
     }
 
@@ -57,7 +55,6 @@ public class HeroScript : MonoBehaviour
     {
         if (vector2Move.x == 0)
         {
-            //rollPlayer();
             playerAnimater.SetBool("move", false);
         }
 
@@ -95,7 +92,7 @@ public class HeroScript : MonoBehaviour
 
     void playerAttack()
     {
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             playerAnimater.SetTrigger("attack");
         }
