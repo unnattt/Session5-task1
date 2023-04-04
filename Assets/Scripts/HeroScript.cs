@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMovement : MonoBehaviour
+public class HeroScript : MonoBehaviour
 {
     private float movespeed = 10f;
     public Rigidbody2D rb;
@@ -16,10 +16,15 @@ public class PlayerMovement : MonoBehaviour
     public void FixedUpdate()
     {
         PlayerJump();
-        setAnimation();
+        setMoveAnimation();
         PlayerMove();
-        FilpPlayer();
+        
+    }
 
+    private void Update()
+    {
+        FilpPlayer();
+        playerAttack();
     }
 
     public void PlayerMove()
@@ -30,12 +35,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void PlayerJump()
     {
-         if (Input.GetKeyDown(KeyCode.Space) && jump == false)
-         {
+        if (Input.GetKeyDown(KeyCode.Space) && jump == false)
+        {
             jump = true;
             playerAnimater.SetBool("Jump", true);
             rb.velocity = Vector2.up * playerJump;
-         }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -48,28 +53,51 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    void setAnimation()
+    void setMoveAnimation()
     {
         if (vector2Move.x == 0)
         {
+            //rollPlayer();
             playerAnimater.SetBool("move", false);
         }
 
         if (vector2Move.x > 0 || vector2Move.x < 0)
         {
+            rollPlayer();
             playerAnimater.SetBool("move", true);
 
         }
     }
-        void FilpPlayer()
+
+    void FilpPlayer()
+    {
+        if (vector2Move.x < -0.1f)
         {
-            if(vector2Move.x < -0.1f)
-            {
-                sp.flipX = true;
-            }
-            if (vector2Move.x > 0.1f)
-            {
-                sp.flipX = false;
-            }
+            sp.flipX = true;
         }
+        if (vector2Move.x > 0.1f)
+        {
+            sp.flipX = false;
+        }
+    }
+
+    void rollPlayer()
+    {
+        if (Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.DownArrow))
+        {
+            playerAnimater.SetBool("roll", true);
+        }
+        else
+        {
+            playerAnimater.SetBool("roll", false);
+        }
+    }
+
+    void playerAttack()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
+            playerAnimater.SetTrigger("attack");
+        }
+    }
 }
