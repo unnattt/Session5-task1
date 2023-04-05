@@ -6,7 +6,7 @@ public class HeroScript : MonoBehaviour
 {
     private float movespeed = 10f;
     public Rigidbody2D rb;
-    float playerJump = 4f;
+    float playerJump = 8f;
 
     bool jump = false;
     public Animator playerAnimater;
@@ -70,11 +70,13 @@ public class HeroScript : MonoBehaviour
     {
         if (vector2Move.x < -0.1f)
         {
-            sp.flipX = true;
+            // sp.flipX = true;
+            transform.localScale = new Vector2(-1.371398f, 1.371398f);
         }
         if (vector2Move.x > 0.1f)
         {
-            sp.flipX = false;
+            transform.localScale = new Vector2(1.371398f, 1.371398f);
+            //sp.flipX = false;
         }
     }
 
