@@ -11,7 +11,6 @@ public class HeroScript : MonoBehaviour
     bool jump = false;
     public Animator playerAnimater;
     Vector2 vector2Move;
-    public SpriteRenderer sp;
 
     public void FixedUpdate()
     {
@@ -70,13 +69,11 @@ public class HeroScript : MonoBehaviour
     {
         if (vector2Move.x < -0.1f)
         {
-            // sp.flipX = true;
             transform.localScale = new Vector2(-1.371398f, 1.371398f);
         }
         if (vector2Move.x > 0.1f)
         {
             transform.localScale = new Vector2(1.371398f, 1.371398f);
-            //sp.flipX = false;
         }
     }
 
