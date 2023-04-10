@@ -20,40 +20,41 @@ public class EnemyScript : MonoBehaviour
     void Enemymove()
     {
         float dir = hero.position.x - transform.position.x;
+        float dirY = hero.position.y - transform.position.y;
 
-        if (Mathf.Abs(dir) < 6f)
+        if (Mathf.Abs(dir) < 6f && Mathf.Abs(dirY) < 1.1f)
         {
             rb.velocity = dir * Vector2.right * speed * Time.deltaTime;
             an.SetBool("followPlayer", true);
         }
-        else
+        else 
         {
             an.SetBool("followPlayer", false);
         }
 
-        if (Mathf.Abs(dir) < 2)
+        if (Mathf.Abs(dir) < 2f && Mathf.Abs(dirY) < 1.1f)
         {
-           if(trigger ==  true)
+            if (trigger == true)
             {
                 trigger = false;
                 StartCoroutine(Attacking());
             }
             rb.velocity = Vector2.zero;
             an.SetBool("followPlayer", false);
+
         }
     }
 
     void flipPlayer()
     {
-        if(rb.velocity.x < -0.1f)
+        if (rb.velocity.x < -0.1f)
         {
-            sp.flipX = true; 
+            sp.flipX = true;
         }
-        else if(rb.velocity.x > 0.1f)
+        else if (rb.velocity.x > 0.1f)
         {
             sp.flipX = false;
         }
-
     }
 
     IEnumerator Attacking()

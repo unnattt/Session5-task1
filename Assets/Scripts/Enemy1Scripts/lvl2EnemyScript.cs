@@ -21,7 +21,7 @@ public class lvl2EnemyScript : MonoBehaviour
     {
         float dir = hero.position.x - transform.position.x;
 
-        if (Mathf.Abs(dir) < 2f)
+        if (Mathf.Abs(dir) < 3f)
         {
             rb.velocity = dir * Vector2.right * speed * Time.deltaTime;
             an.SetBool("followPlayer", true);
@@ -31,7 +31,7 @@ public class lvl2EnemyScript : MonoBehaviour
             an.SetBool("followPlayer", false);
         }
 
-        if (Mathf.Abs(dir) < 1)
+        if (Mathf.Abs(dir) < 2f)
         {
             if (trigger == true)
             {

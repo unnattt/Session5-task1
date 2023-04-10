@@ -27,7 +27,7 @@ public class HeroScript : MonoBehaviour
 
     public void PlayerMove()
     {
-        vector2Move = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
+        vector2Move = new Vector2(Input.GetAxis("Horizontal"),0f);
         transform.Translate((vector2Move * movespeed * Time.deltaTime).x, 0f, 0f);
     }
 

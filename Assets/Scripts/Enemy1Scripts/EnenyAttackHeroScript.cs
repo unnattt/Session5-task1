@@ -35,7 +35,6 @@ public class EnenyAttackHeroScript : MonoBehaviour
             an.SetBool("Alive", false);
             Destroy(hero,1);
             Panel.SetActive(true);
-
         }
     }
     private void Update()
@@ -58,4 +57,5 @@ public class EnenyAttackHeroScript : MonoBehaviour
     {
         ishitting = false;
     }
+
 }
